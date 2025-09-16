@@ -4,13 +4,14 @@ pipeline {
         stage('build') {
             agent {
                 docker {
-                    image 'node:alpine'
+                    image 'node:16'
                     
                 }
             }
             steps {
                 sh '''
                     node --version
+                    sudo chown -R 122:124 "/.npm"
                     npm --version
                     npm ci
                     npm run build
